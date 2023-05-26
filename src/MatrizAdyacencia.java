@@ -27,46 +27,42 @@ public class MatrizAdyacencia {
     public boolean existeVertice (int pos1, int pos2){
         if(Matriz[pos1 - 1][pos2 - 1] == 1){
             return false;
+        } else if (Matriz[pos2 - 1][pos1 - 1] == 1) {
+            return false;
         }
         return true;
     }
 
     public boolean validarMatriz() {
-        int rowCount = Matriz.length;
-        int columnCount = Matriz[0].length;
-        int[] cF = new int[rowCount]; // Contador de unos por fila
-        int[] cC = new int[columnCount];
+
+        boolean[] visitados = new boolean[tamaño];
+
+        dfs(0, visitados); // Comenzar el recorrido DFS desde el vértice 0
+
+        // Verificar si todos los vértices han sido visitados
+        for (boolean visitado : visitados) {
+            if (!visitado) {
+                return false; // Grafo no conectado
+            }
+        }
+
+        return true; // Grafo conectado
+    }
+
+    private void dfs(int vertice, boolean[] visitados) {
+        visitados[vertice] = true;
 
         for (int i = 0; i < tamaño; i++) {
-            for (int j = 0; j < tamaño; j++) {
-                if (Matriz[i][j] == 1) {
-                    cF[i]++;
-                    cC[j]++;
-                }
+            if (Matriz[vertice][i] == 1 && !visitados[i]) {
+                dfs(i, visitados);
             }
         }
-        // Verificar si al menos hay un uno en cada fila y columna
-        for (int i = 0; i < rowCount; i++) {
-            if (cF[i] == 0) {
-                return false; // Falta al menos un uno en la fila i
-            }
-        }
-
-        for (int j = 0; j < columnCount; j++) {
-            if (cC[j] == 0) {
-                return false; // Falta al menos un uno en la columna j
-            }
-        }
-
-
-
-        return true; // Todos los requisitos cumplidos
-
     }
+
 
     public  void imprimirMatriz(){
 
-            JFrame frame = new JFrame("Graph Visualizer");
+            JFrame frame = new JFrame("Grafo con matriz de adyacencia");
             GraphVisualizer graphVisualizer = new GraphVisualizer(Matriz);
             frame.add(graphVisualizer);
             frame.setSize(500, 500);

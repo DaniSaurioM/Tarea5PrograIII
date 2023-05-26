@@ -34,7 +34,6 @@ public class MainClass {
                         if (valido) {
                             System.out.println("Se agrega vertice");
                             matrizAdyacencia.definirMatriz(ver1, ver2);
-                            matrizAdyacencia.definirMatriz(ver2, ver1);
                         }else{
                             System.out.println("Vertice ya existe");
 
