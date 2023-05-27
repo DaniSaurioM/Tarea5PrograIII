@@ -2,15 +2,18 @@ import javax.swing.*;
 
 public class MatrizAdyacencia {
     int Matriz[][];
+    int Pesos[][];
     int tamaño;
 
     public MatrizAdyacencia(int tamaño) {
         Matriz = new int[tamaño][tamaño];
+        Pesos = new int[tamaño][tamaño];
         this.tamaño = tamaño;
         // inicializar matriz en 0
         for (int i = 0; i < tamaño; i++) {
             for (int j = 0; j < tamaño; j++) {
                 Matriz[i][j] = 0;
+                Pesos[i][j] = 0;
             }
 
         }
@@ -18,10 +21,10 @@ public class MatrizAdyacencia {
 
     // metodo ingresar datos a la matriz
 
-    public void definirMatriz(int pos1, int pos2) {
-
-            Matriz[pos1 - 1][pos2 - 1] = 1;
-            System.out.println("Vertice agregado correctamente");
+    public void definirMatriz(int pos1, int pos2,int peso) {
+        Matriz[pos1 - 1][pos2 - 1] = 1;
+        Pesos[pos1 - 1][pos2 - 1] = peso;
+        System.out.println("Vertice agregado correctamente");
 
     }
     public boolean existeVertice (int pos1, int pos2){
@@ -63,7 +66,7 @@ public class MatrizAdyacencia {
     public  void imprimirMatriz(){
 
             JFrame frame = new JFrame("Grafo con matriz de adyacencia");
-            GraphVisualizer graphVisualizer = new GraphVisualizer(Matriz);
+            GraphVisualizer graphVisualizer = new GraphVisualizer(Matriz,Pesos);
             frame.add(graphVisualizer);
             frame.setSize(500, 500);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

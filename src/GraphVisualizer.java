@@ -4,9 +4,11 @@ import java.awt.Graphics;
 
 public class GraphVisualizer extends JPanel {
     private int[][] MatrizAdyacencia;
+    private int[][] Pesos;
 
-    public GraphVisualizer(int[][] MatrizAdyacencia) {
+    public GraphVisualizer(int[][] MatrizAdyacencia,int[][] Pesos) {
         this.MatrizAdyacencia = MatrizAdyacencia;
+        this.Pesos = Pesos;
     }
 
     @Override
@@ -38,7 +40,8 @@ public class GraphVisualizer extends JPanel {
                     int destY = (int) (centerY + Math.sin(j * angle) * centerY * 0.8);
 
                     g.drawLine(x, y, destX, destY);
-                    g.drawString(String.valueOf(MatrizAdyacencia[i][j]), (x + destX) / 2, (y + destY) / 2);
+                    // Mostrar el peso de la arista
+                    g.drawString(String.valueOf(Pesos[i][j]), (x + destX) / 2, (y + destY) / 2 + 15);
                 }
             }
         }

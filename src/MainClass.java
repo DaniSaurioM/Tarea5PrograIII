@@ -25,7 +25,8 @@ public class MainClass {
                     int ver1 = scanner.nextInt();
                     System.out.println("a que vertice :");
                     int ver2 = scanner.nextInt();
-
+                    System.out.println("Ingrese el peso de la arista:");
+                    int peso = scanner.nextInt();
                     if (ver1 == ver2) {
                         System.out.println("no puede autoreferenciar vertices");
 
@@ -33,7 +34,7 @@ public class MainClass {
                         boolean valido = matrizAdyacencia.existeVertice(ver1,ver2);
                         if (valido) {
                             System.out.println("Se agrega vertice");
-                            matrizAdyacencia.definirMatriz(ver1, ver2);
+                            matrizAdyacencia.definirMatriz(ver1, ver2, peso);
                         }else{
                             System.out.println("Vertice ya existe");
 
